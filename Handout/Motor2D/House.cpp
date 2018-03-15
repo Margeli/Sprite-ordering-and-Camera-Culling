@@ -33,7 +33,14 @@ bool House::Awake(pugi::xml_node&)
 bool House::Update(float dt)
 {
 	//TODO 1: Create a method that prints the house befor the player or after the player
-
+	if (App->entities->player->position.y > position.y + image_size_h / 2) {
+	//player in front
+		priority = 1;
+	}
+	else {
+	//player in the back
+		priority = 3;
+	}
 	
 	return true;
 }

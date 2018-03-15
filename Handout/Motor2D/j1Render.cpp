@@ -334,11 +334,11 @@ void j1Render::FillQueue(uint Priority,SDL_Texture* texture, int x, int y, const
 	}
 
 	//TODO 2: Create a method that check wha tto put inside the queue and what not.
+	if (CameraCollision(aux_rect)) {
 
-	
-	ObjectToPrint* auxObject = new ObjectToPrint(Priority, texture, x, y, section, scale, speed, angle, pivot_x, pivot_y, aux_rect);
-	SpriteOrderer.push(auxObject);
-
+		ObjectToPrint* auxObject = new ObjectToPrint(Priority, texture, x, y, section, scale, speed, angle, pivot_x, pivot_y, aux_rect);
+		SpriteOrderer.push(auxObject);
+	}
 }
 
 //This function prints all the elements of the queue

@@ -94,45 +94,11 @@ int Quadtree::getIndex(const SDL_Rect& r)
 //TODO 3: Create the Insert() function.
 bool Quadtree::insert(ObjectToPrint* obj)
 {
-	if (obj == nullptr)
-	{
+	ObjectToPrint* auxobj;
+	if (!CheckBoundaries(auxobj->rect)) {
 		return false;
 	}
-
-	if (CheckBoundaries(obj->rect) == false)
-	{
-		return false;
-	}
-
-	if (Children[0] != nullptr)
-	{
-		int index = getIndex(obj->rect);
-		if (index = !- 1)
-		{
-			Children[index]->insert(obj);
-		}
-		return true;
-	}
-
-	Objects.push_back(obj);
-
-	if (Objects.size() > MAX_OBJECTS && Level<MAX_LEVELS)
-	{
-		if (Children[0] == nullptr)
-		{
-			Split();
-		}
-
-		for (list<ObjectToPrint*>::iterator item = Objects.begin(); item != Objects.end(); item++)
-		{
-			int index = getIndex((*item)->rect);
-			if (index != -1)
-			{
-				Children[index]->insert(*item);
-				Objects.remove(*item);
-			}
-		}
-	}
+	
 
 	return true;	
 }
@@ -140,17 +106,6 @@ bool Quadtree::insert(ObjectToPrint* obj)
 //TODO 3: Create the FillCollisionVector() function.
 vector<ObjectToPrint*> Quadtree::FillCollisionVector(vector<ObjectToPrint*> &ObjList, const SDL_Rect& camera)
 {
-	int index = getIndex(camera);
-	if (index != -1 && Children[0] != nullptr)
-	{
-		Children[index]->FillCollisionVector(ObjList, camera);
-	}
-
-	for (list<ObjectToPrint*>::iterator item = Objects.begin(); item != Objects.end(); item++)
-	{
-		ObjList.push_back(*item);
-	}
-
 	
 	return ObjList;
 }
